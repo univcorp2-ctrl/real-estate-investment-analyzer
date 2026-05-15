@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900" role="img" aria-label="Kantei-san scoring flow diagram">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 36px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .sub { font: 500 17px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #475569; }
+      .axis { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 18; }
+      .rank { fill: #eff6ff; stroke: #2563eb; stroke-width: 3; rx: 22; }
+      .gate { fill: #fff1f2; stroke: #fb7185; stroke-width: 3; rx: 22; }
+      .label { font: 700 19px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #334155; }
+      .score { font: 800 26px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #2563eb; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#64748b" /></marker>
+  </defs>
+  <rect class="bg" width="1280" height="900" />
+  <text class="title" x="60" y="70">Kantei-san スコアリング・ランク判定フロー</text>
+  <text class="sub" x="60" y="104">6軸×5点=30点で基本ランクを出し、重大リスクでランク上限を補正する</text>
+
+  <rect class="axis" x="70" y="160" width="330" height="110" rx="18" />
+  <text class="label" x="100" y="198">収益性</text>
+  <text class="score" x="320" y="206">0-5</text>
+  <text class="small" x="100" y="232">表面利回り / NOI / CF / DSCR</text>
+  <text class="small" x="100" y="254">儲かる力を見る</text>
+
+  <rect class="axis" x="475" y="160" width="330" height="110" rx="18" />
+  <text class="label" x="505" y="198">立地</text>
+  <text class="score" x="725" y="206">0-5</text>
+  <text class="small" x="505" y="232">駅徒歩 / 人口 / 駅力 / 流動性</text>
+  <text class="small" x="505" y="254">借り手・買い手の強さを見る</text>
+
+  <rect class="axis" x="880" y="160" width="330" height="110" rx="18" />
+  <text class="label" x="910" y="198">融資条件</text>
+  <text class="score" x="1130" y="206">0-5</text>
+  <text class="small" x="910" y="232">DSCR / LTV / 金利 / 返済期間</text>
+  <text class="small" x="910" y="254">ローン返済の安全性を見る</text>
+
+  <rect class="axis" x="70" y="330" width="330" height="110" rx="18" />
+  <text class="label" x="100" y="368">リスク耐性</text>
+  <text class="score" x="320" y="376">0-5</text>
+  <text class="small" x="100" y="402">空室 / 家賃下落 / ハザード</text>
+  <text class="small" x="100" y="424">悪い状況への強さを見る</text>
+
+  <rect class="axis" x="475" y="330" width="330" height="110" rx="18" />
+  <text class="label" x="505" y="368">価格妥当性</text>
+  <text class="score" x="725" y="376">0-5</text>
+  <text class="small" x="505" y="402">類似取引 / 収益還元 / 積算</text>
+  <text class="small" x="505" y="424">高値掴みでないかを見る</text>
+
+  <rect class="axis" x="880" y="330" width="330" height="110" rx="18" />
+  <text class="label" x="910" y="368">出口戦略</text>
+  <text class="score" x="1130" y="376">0-5</text>
+  <text class="small" x="910" y="402">土地値 / 残存耐用年数 / 売却性</text>
+  <text class="small" x="910" y="424">最後に売れるかを見る</text>
+
+  <path class="arrow" d="M640 450 V520" />
+
+  <rect class="rank" x="245" y="520" width="790" height="140" rx="22" />
+  <text class="label" x="285" y="562">基本ランク</text>
+  <text class="small" x="285" y="596">22-30点: S　20-21点: A　15-19点: B　12-14点: C　8-11点: D　0-7点: E</text>
+  <text class="small" x="285" y="628">ここでは一度、単純な点数だけでランクを出す</text>
+
+  <path class="arrow" d="M640 660 V710" />
+
+  <rect class="gate" x="245" y="710" width="790" height="130" rx="22" />
+  <text class="label" x="285" y="750">ゲート判定</text>
+  <text class="small" x="285" y="784">DSCR&lt;1.0 / CF赤字 / 損益分岐稼働率&gt;100% / 出口リスク / 重大ハザード / データ不足</text>
+  <text class="small" x="285" y="812">重大リスクがある場合、SやAにしない。初心者の過大評価を防ぐ。</text>
+</svg>

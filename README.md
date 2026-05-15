@@ -14,6 +14,21 @@
 - 国交省 不動産情報ライブラリAPIから、取引事例・地価・用途地域・人口・駅・ハザードを取得するCLIを追加
 - 路線価/倍率/地価公示から土地値カバー率を計算
 - 類似取引・収益還元・積算の3方式で価格妥当性を推定
+- Cloud Run上で動くサーバーAPIを追加
+- GitHub ActionsからCloud Runへデプロイするワークフローを追加
+
+## APIキー管理
+
+APIキーはGitHubに直接入れないでください。
+
+- ローカル: `.env` またはシェル環境変数。`.env`はgitignore対象
+- GitHub Actions: GitHub Secrets / Variables。ただしサービスアカウントJSONキーは避け、Workload Identity Federationを推奨
+- 本番Cloud Run: Google Cloud Secret Manager
+
+詳細:
+
+- [`docs/secrets-and-cloud.md`](docs/secrets-and-cloud.md): APIキー管理・クラウド運用設計
+- [`docs/cloud-run-setup.md`](docs/cloud-run-setup.md): Google Cloud Run セットアップ手順
 
 ## 推定した主要パラメータ
 
@@ -33,7 +48,28 @@
 | `routeValueYenPerSqm` | 路線価 | 円/m2 | 国税庁路線価、CSV、商用API、手入力 |
 | `fixedAssetTaxValueYen` | 固定資産税評価額 | 円 | 倍率方式に使用 |
 | `valuationMultiplier` | 評価倍率 | 倍 | 倍率方式に使用 |
-| `landCoverRate` | 土地値カバー率 | % | 現状UIでは手入力値。CLIでは自動計算も可能 |
+| `landCoverRate` | 土地値カバー率 | % | 現状UIでは手入力値。CLI/APIでは自動計算も可能 |
+
+## Cloud Runで動かす
+
+```bash
+npm install
+npm start
+```
+
+Cloud Run用:
+
+```bash
+export MLIT_REINFO_API_KEY="発行されたAPIキー"
+PORT=8080 npm start
+```
+
+API:
+
+```text
+GET  /healthz
+POST /api/analyze
+```
 
 ## データ取得CLI
 
@@ -68,7 +104,7 @@ node src/cli/fetchInvestmentData.js --input data/sample-property.json --offline
 
 現状のWeb UIは外部APIから自動取得していません。URLパラメータ、画面フォームの手入力、デフォルト値を元に判定しています。
 
-データ取得CLIでは、国交省 不動産情報ライブラリAPIから次を取得できます。
+データ取得CLI/APIでは、国交省 不動産情報ライブラリAPIから次を取得できます。
 
 - 不動産価格（取引価格・成約価格）情報
 - 地価公示・地価調査
@@ -80,7 +116,7 @@ node src/cli/fetchInvestmentData.js --input data/sample-property.json --offline
 
 路線価は国税庁の公式APIが確認できないため、MVPでは `routeValueYenPerSqm` の手入力、CSV、自社DB、商用APIアダプタで対応します。
 
-## 起動方法
+## Web UI起動方法
 
 静的HTMLなので、そのまま `index.html` をブラウザで開けます。
 
@@ -100,7 +136,10 @@ npm run dev
 - [`docs/input-data-sources.md`](docs/input-data-sources.md): インプット元データ・価格妥当性・土地値カバー率の算出仕様
 - [`docs/source-inventory.md`](docs/source-inventory.md): 情報ソース整理表
 - [`docs/data-pipeline.md`](docs/data-pipeline.md): データ取得・算出パイプライン仕様
+- [`docs/secrets-and-cloud.md`](docs/secrets-and-cloud.md): APIキー管理・クラウド運用設計
+- [`docs/cloud-run-setup.md`](docs/cloud-run-setup.md): Google Cloud Run セットアップ手順
 - [`src/analysisLogic.js`](src/analysisLogic.js): 計算・判定ロジック
 - [`src/data/pipeline.js`](src/data/pipeline.js): 公的データ取得と統合処理
 - [`src/data/landValuation.js`](src/data/landValuation.js): 土地値カバー率・価格妥当性計算
+- [`src/server.js`](src/server.js): Cloud Run互換のHTTPサーバー
 - [`test/analysisLogic.test.js`](test/analysisLogic.test.js): 主要ロジックのテスト

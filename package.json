@@ -1,10 +1,11 @@
 {
   "name": "real-estate-investment-analyzer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Prototype real estate investment scoring, public data acquisition, and valuation analyzer.",
   "type": "commonjs",
   "scripts": {
     "dev": "npx http-server . -p 4173 -c-1",
+    "start": "node src/server.js",
     "test": "node --test",
     "fetch:data": "node src/cli/fetchInvestmentData.js --input data/sample-property.json --out data/sample-output.json"
   },

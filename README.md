@@ -28,9 +28,17 @@
 | `opexRatio` | 運営費率 | % | デフォルト25% |
 | `vacancyRatio` | 空室損率 | % | デフォルト5% |
 | `purchaseCostRatio` | 諸費用率 | % | デフォルト7% |
-| `landCoverRate` | 土地値カバー率 | % | 出口戦略の加点/減点に使用 |
+| `landCoverRate` | 土地値カバー率 | % | 出口戦略の加点/減点に使用。現状は手入力値 |
 | `stationWalk` | 駅徒歩 | 分 | 立地評価に使用 |
 | `populationTrend` | 人口トレンド | growing / flat / declining | 立地評価に使用 |
+
+## 重要: インプット元データについて
+
+現状プロトタイプは外部APIから自動取得していません。URLパラメータ、画面フォームの手入力、デフォルト値を元に判定しています。
+
+本番運用で必要になる元データ、価格妥当性、土地値カバー率の算出仕様は以下に整理しています。
+
+- [`docs/input-data-sources.md`](docs/input-data-sources.md): インプット元データ・価格妥当性・土地値カバー率の算出仕様
 
 ## 起動方法
 
@@ -49,5 +57,6 @@ npm run dev
 ## ロジック資料
 
 - [`docs/requirements.md`](docs/requirements.md): リバースエンジニアリング結果と要件定義
+- [`docs/input-data-sources.md`](docs/input-data-sources.md): インプット元データ・価格妥当性・土地値カバー率の算出仕様
 - [`src/analysisLogic.js`](src/analysisLogic.js): 計算・判定ロジック
 - [`test/analysisLogic.test.js`](test/analysisLogic.test.js): 主要ロジックのテスト

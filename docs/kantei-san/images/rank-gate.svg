@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-label="Kantei-san rank gate diagram">
+  <defs>
+    <style>
+      .bg { fill: #fff7ed; }
+      .title { font: 700 36px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .sub { font: 500 17px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #fdba74; stroke-width: 2; rx: 22; }
+      .danger { fill: #fff1f2; stroke: #fb7185; stroke-width: 3; rx: 22; }
+      .ok { fill: #ecfdf5; stroke: #34d399; stroke-width: 3; rx: 22; }
+      .label { font: 700 21px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .small { font: 500 15px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #334155; }
+      .rank { font: 800 54px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #e11d48; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#64748b" /></marker>
+  </defs>
+  <rect class="bg" width="1280" height="760" />
+  <text class="title" x="60" y="70">Kantei-san ゲート判定</text>
+  <text class="sub" x="60" y="104">総点が高くても、重大リスクがあればランクを下げる安全装置</text>
+
+  <rect class="box" x="80" y="170" width="280" height="160" rx="22" />
+  <text class="label" x="110" y="212">基本ランク</text>
+  <text class="rank" x="110" y="282" fill="#2563eb">S</text>
+  <text class="small" x="190" y="254">総点 24/30</text>
+  <text class="small" x="190" y="282">点数だけなら優秀</text>
+
+  <path class="arrow" d="M360 250 H455" />
+
+  <rect class="danger" x="455" y="135" width="370" height="230" rx="22" />
+  <text class="label" x="490" y="178">重大リスクチェック</text>
+  <text class="small" x="490" y="216">□ DSCR &lt; 1.0</text>
+  <text class="small" x="490" y="242">□ 月間CFが赤字</text>
+  <text class="small" x="490" y="268">□ 損益分岐稼働率 &gt; 100%</text>
+  <text class="small" x="490" y="294">□ 出口リスクが大きい</text>
+  <text class="small" x="490" y="320">□ ハザード重大該当</text>
+
+  <path class="arrow" d="M825 250 H920" />
+
+  <rect class="danger" x="920" y="170" width="280" height="160" rx="22" />
+  <text class="label" x="950" y="212">最終ランク</text>
+  <text class="rank" x="950" y="282">D</text>
+  <text class="small" x="1030" y="254">CF赤字なら</text>
+  <text class="small" x="1030" y="282">原則見送り</text>
+
+  <rect class="ok" x="250" y="470" width="780" height="150" rx="22" />
+  <text class="label" x="290" y="512">なぜ必要か</text>
+  <text class="small" x="290" y="548">初心者は総点や利回りの高さに引っ張られやすい。ゲート判定は、返済不能・毎月赤字・出口不能のような失敗しやすい条件を強制的に反映する。</text>
+  <text class="small" x="290" y="580">Kantei-san は「高得点に見える危険物件」を過大評価しないため、最終ランクを補正する。</text>
+</svg>

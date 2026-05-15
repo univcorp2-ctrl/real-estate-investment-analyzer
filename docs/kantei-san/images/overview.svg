@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-label="Kantei-san overview diagram">
+  <defs>
+    <style>
+      .bg { fill: #f6f8fb; }
+      .title { font: 700 38px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .sub { font: 500 18px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 22; }
+      .box-blue { fill: #eff6ff; stroke: #60a5fa; }
+      .box-green { fill: #ecfdf5; stroke: #34d399; }
+      .box-orange { fill: #fff7ed; stroke: #fb923c; }
+      .box-purple { fill: #faf5ff; stroke: #c084fc; }
+      .label { font: 700 20px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .small { font: 500 15px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #334155; }
+      .muted { font: 500 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #64748b; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#64748b" />
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="760" />
+  <text class="title" x="64" y="70">Kantei-san 全体像</text>
+  <text class="sub" x="64" y="104">収益不動産を、収支・融資・リスク・価格・出口から初期判定するロジック</text>
+
+  <rect class="box box-blue" x="64" y="160" width="260" height="150" rx="22" />
+  <text class="label" x="94" y="202">1. 物件入力</text>
+  <text class="small" x="94" y="236">価格 / 賃料 / 構造</text>
+  <text class="small" x="94" y="260">築年数 / 借入 / 金利</text>
+  <text class="small" x="94" y="284">所在地 / 面積 / 税金</text>
+
+  <rect class="box box-green" x="390" y="160" width="260" height="150" rx="22" />
+  <text class="label" x="420" y="202">2. 収支計算</text>
+  <text class="small" x="420" y="236">表面利回り</text>
+  <text class="small" x="420" y="260">NOI / DSCR</text>
+  <text class="small" x="420" y="284">月間CF / CCR</text>
+
+  <rect class="box box-orange" x="716" y="160" width="260" height="150" rx="22" />
+  <text class="label" x="746" y="202">3. 外部データ</text>
+  <text class="small" x="746" y="236">取引価格 / 地価</text>
+  <text class="small" x="746" y="260">人口 / 駅 / 用途地域</text>
+  <text class="small" x="746" y="284">ハザード / 路線価</text>
+
+  <rect class="box box-purple" x="390" y="390" width="260" height="150" rx="22" />
+  <text class="label" x="420" y="432">4. 6軸スコア</text>
+  <text class="small" x="420" y="466">収益性 / 立地 / 融資</text>
+  <text class="small" x="420" y="490">リスク / 価格 / 出口</text>
+  <text class="small" x="420" y="514">30点満点</text>
+
+  <rect class="box" x="716" y="390" width="260" height="150" rx="22" />
+  <text class="label" x="746" y="432">5. ゲート判定</text>
+  <text class="small" x="746" y="466">CF赤字 / DSCR不足</text>
+  <text class="small" x="746" y="490">出口リスク / ハザード</text>
+  <text class="small" x="746" y="514">重大リスクで上限補正</text>
+
+  <rect class="box box-blue" x="1010" y="275" width="220" height="150" rx="22" />
+  <text class="label" x="1040" y="316">6. 判定結果</text>
+  <text class="small" x="1040" y="350">S / A / B / C / D / E</text>
+  <text class="small" x="1040" y="374">確認ポイント</text>
+  <text class="small" x="1040" y="398">初心者向け説明</text>
+
+  <path class="arrow" d="M324 235 H390" />
+  <path class="arrow" d="M650 235 H716" />
+  <path class="arrow" d="M846 310 V390" />
+  <path class="arrow" d="M716 465 H650" />
+  <path class="arrow" d="M650 465 H716" />
+  <path class="arrow" d="M976 465 C1040 465 1040 425 1050 425" />
+  <path class="arrow" d="M976 235 C1050 235 1050 275 1050 275" />
+
+  <rect class="box" x="64" y="610" width="1166" height="86" rx="22" />
+  <text class="label" x="94" y="646">重要思想</text>
+  <text class="small" x="94" y="674">Kantei-san は「利回りが高い物件」を探すだけでなく、「失敗しにくい物件か」を見る。総点が高くても重大リスクがあればランクを下げる。</text>
+</svg>

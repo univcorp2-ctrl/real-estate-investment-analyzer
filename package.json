@@ -1,11 +1,12 @@
 {
   "name": "real-estate-investment-analyzer",
-  "version": "0.1.0",
-  "description": "Prototype real estate investment scoring and cash-flow analyzer based on public behavior inference.",
+  "version": "0.2.0",
+  "description": "Prototype real estate investment scoring, public data acquisition, and valuation analyzer.",
   "type": "commonjs",
   "scripts": {
     "dev": "npx http-server . -p 4173 -c-1",
-    "test": "node --test"
+    "test": "node --test",
+    "fetch:data": "node src/cli/fetchInvestmentData.js --input data/sample-property.json --out data/sample-output.json"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

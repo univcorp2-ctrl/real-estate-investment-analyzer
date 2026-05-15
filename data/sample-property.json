@@ -1,0 +1,20 @@
+{
+  "name": "東村山市 戸建て サンプル",
+  "propertyType": "戸建て賃貸",
+  "address": "東京都東村山市",
+  "lat": 35.7546,
+  "lon": 139.4685,
+  "price": 880,
+  "str": "RC",
+  "age": 0,
+  "loanAmt": 880,
+  "rent": 0,
+  "br": 58,
+  "ir": 2,
+  "ly": 30,
+  "landAreaSqm": 90,
+  "buildingAreaSqm": 70,
+  "routeValueYenPerSqm": 120000,
+  "landCorrectionRate": 1.0,
+  "capRatePct": 8.0
+}

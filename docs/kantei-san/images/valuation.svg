@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="880" viewBox="0 0 1280 880" role="img" aria-label="Kantei-san valuation diagram">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 36px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .sub { font: 500 17px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 22; }
+      .blue { fill: #eff6ff; stroke: #60a5fa; }
+      .green { fill: #ecfdf5; stroke: #34d399; }
+      .purple { fill: #faf5ff; stroke: #c084fc; }
+      .orange { fill: #fff7ed; stroke: #fb923c; }
+      .label { font: 700 20px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #334155; }
+      .formula { font: 700 16px 'SFMono-Regular', Consolas, monospace; fill: #0f172a; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#64748b" /></marker>
+  </defs>
+  <rect class="bg" width="1280" height="880" />
+  <text class="title" x="60" y="70">Kantei-san 価格妥当性・土地値カバー率</text>
+  <text class="sub" x="60" y="104">売出価格が高すぎないか、土地値でどれだけ守られているかを分解して見る</text>
+
+  <rect class="box blue" x="70" y="160" width="330" height="160" rx="22" />
+  <text class="label" x="100" y="202">類似取引価格</text>
+  <text class="small" x="100" y="238">近隣の取引事例を取得</text>
+  <text class="small" x="100" y="262">距離・面積・築年・構造で補正</text>
+  <text class="formula" x="100" y="294">中央値単価 × 対象面積</text>
+
+  <rect class="box green" x="475" y="160" width="330" height="160" rx="22" />
+  <text class="label" x="505" y="202">収益還元価格</text>
+  <text class="small" x="505" y="238">物件が生むNOIから価値を見る</text>
+  <text class="small" x="505" y="262">利回り相場で割り戻す</text>
+  <text class="formula" x="505" y="294">NOI ÷ キャップレート</text>
+
+  <rect class="box purple" x="880" y="160" width="330" height="160" rx="22" />
+  <text class="label" x="910" y="202">積算価格</text>
+  <text class="small" x="910" y="238">土地と建物を分けて見る</text>
+  <text class="small" x="910" y="262">出口・担保評価に重要</text>
+  <text class="formula" x="910" y="294">土地評価額 + 建物残存価値</text>
+
+  <path class="arrow" d="M235 320 C235 395 420 430 500 470" />
+  <path class="arrow" d="M640 320 V455" />
+  <path class="arrow" d="M1045 320 C1045 395 860 430 780 470" />
+
+  <rect class="box orange" x="350" y="455" width="580" height="145" rx="24" />
+  <text class="label" x="390" y="500">妥当価格</text>
+  <text class="formula" x="390" y="536">類似取引 × w1 + 収益還元 × w2 + 積算 × w3</text>
+  <text class="small" x="390" y="568">物件タイプごとに重みを変える。戸建ては土地値、一棟は収益還元を重視。</text>
+
+  <path class="arrow" d="M640 600 V650" />
+
+  <rect class="box" x="350" y="650" width="580" height="135" rx="24" />
+  <text class="label" x="390" y="692">価格乖離率</text>
+  <text class="formula" x="390" y="728">売買価格 ÷ 妥当価格</text>
+  <text class="small" x="390" y="760">1.00に近いほど妥当。1.30超はかなり割高、0.85以下は割安候補。</text>
+
+  <rect class="box green" x="70" y="650" width="230" height="135" rx="22" />
+  <text class="label" x="100" y="692">土地値カバー率</text>
+  <text class="formula" x="100" y="728">土地評価額</text>
+  <text class="formula" x="100" y="752">÷ 売買価格</text>
+
+  <path class="arrow" d="M300 715 H350" />
+
+  <rect class="box" x="980" y="650" width="230" height="135" rx="22" />
+  <text class="label" x="1010" y="692">出口戦略</text>
+  <text class="small" x="1010" y="728">土地値が厚いほど</text>
+  <text class="small" x="1010" y="752">売却時の守りが強い</text>
+  <path class="arrow" d="M930 715 H980" />
+</svg>

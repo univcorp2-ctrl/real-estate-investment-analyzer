@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="840" viewBox="0 0 1280 840" role="img" aria-label="Kantei-san data sources diagram">
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 700 36px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .sub { font: 500 17px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #475569; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 20; }
+      .public { fill: #eff6ff; stroke: #60a5fa; }
+      .private { fill: #f0fdf4; stroke: #34d399; }
+      .manual { fill: #fff7ed; stroke: #fb923c; }
+      .core { fill: #f5f3ff; stroke: #a78bfa; stroke-width: 3; }
+      .label { font: 700 20px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #0f172a; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; fill: #334155; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#64748b" /></marker>
+  </defs>
+  <rect class="bg" width="1280" height="840" />
+  <text class="title" x="60" y="70">Kantei-san データ取得元</text>
+  <text class="sub" x="60" y="104">手入力・公的API・民間/自社DBを統合して、判定の根拠を作る</text>
+
+  <rect class="box manual" x="60" y="160" width="330" height="180" rx="20" />
+  <text class="label" x="90" y="200">物件資料・手入力</text>
+  <text class="small" x="90" y="236">価格 / 賃料 / 構造 / 築年数</text>
+  <text class="small" x="90" y="260">借入額 / 金利 / 返済期間</text>
+  <text class="small" x="90" y="284">土地面積 / 建物面積</text>
+  <text class="small" x="90" y="308">固定資産税 / 管理費 / 修繕費</text>
+
+  <rect class="box public" x="475" y="150" width="330" height="220" rx="20" />
+  <text class="label" x="505" y="190">公的オープンデータ</text>
+  <text class="small" x="505" y="226">国交省 不動産情報ライブラリAPI</text>
+  <text class="small" x="505" y="250">取引価格 / 地価公示 / 用途地域</text>
+  <text class="small" x="505" y="274">人口 / 駅別乗降客数</text>
+  <text class="small" x="505" y="298">洪水 / 津波 / 土砂災害</text>
+  <text class="small" x="505" y="322">国税庁 路線価・評価倍率</text>
+
+  <rect class="box private" x="890" y="160" width="330" height="180" rx="20" />
+  <text class="label" x="920" y="200">民間・自社DB</text>
+  <text class="small" x="920" y="236">近隣募集賃料 / 成約賃料</text>
+  <text class="small" x="920" y="260">修繕履歴 / 空室期間</text>
+  <text class="small" x="920" y="284">融資承認実績</text>
+  <text class="small" x="920" y="308">管理会社ヒアリング</text>
+
+  <rect class="box core" x="350" y="480" width="580" height="190" rx="24" />
+  <text class="label" x="390" y="524">Kantei-san データ統合</text>
+  <text class="small" x="390" y="560">1. 入力値の単位を正規化</text>
+  <text class="small" x="390" y="584">2. 緯度経度から周辺データ取得</text>
+  <text class="small" x="390" y="608">3. 類似取引・地価・ハザードを抽出</text>
+  <text class="small" x="390" y="632">4. 土地値・妥当価格・6軸スコアに変換</text>
+
+  <path class="arrow" d="M225 340 C225 440 350 520 350 560" />
+  <path class="arrow" d="M640 370 V480" />
+  <path class="arrow" d="M1055 340 C1055 440 930 520 930 560" />
+
+  <rect class="box" x="350" y="720" width="580" height="70" rx="20" />
+  <text class="small" x="385" y="760">出力: DSCR / CF / CCR / 土地値カバー率 / 価格乖離率 / ハザード / データ品質 / S-A-B-C-D-E</text>
+  <path class="arrow" d="M640 670 V720" />
+</svg>

@@ -11,7 +11,9 @@
 - 6軸評価で 30 点満点のスコアを算出
 - S / A / B / C / D / E の総合ランクを表示
 - 危険条件を red flag として検出し、総点が高くても上位ランクを抑制
-- クエリ例: `?price=880&str=RC&age=0&loanAmt=880&rent=0&ir=2&ly=30&br=58&name=東村山市%20戸建て`
+- 国交省 不動産情報ライブラリAPIから、取引事例・地価・用途地域・人口・駅・ハザードを取得するCLIを追加
+- 路線価/倍率/地価公示から土地値カバー率を計算
+- 類似取引・収益還元・積算の3方式で価格妥当性を推定
 
 ## 推定した主要パラメータ
 
@@ -25,20 +27,58 @@
 | `br` | 推定月額賃料 | 千円 | `58` は 5.8万円/月として扱う推定 |
 | `ir` | 金利 | %/年 | 2 = 年2% |
 | `ly` | 返済期間 | 年 | 30 = 30年 |
-| `opexRatio` | 運営費率 | % | デフォルト25% |
-| `vacancyRatio` | 空室損率 | % | デフォルト5% |
-| `purchaseCostRatio` | 諸費用率 | % | デフォルト7% |
-| `landCoverRate` | 土地値カバー率 | % | 出口戦略の加点/減点に使用。現状は手入力値 |
-| `stationWalk` | 駅徒歩 | 分 | 立地評価に使用 |
-| `populationTrend` | 人口トレンド | growing / flat / declining | 立地評価に使用 |
+| `landAreaSqm` | 土地面積 | m2 | 土地値カバー率に使用 |
+| `buildingAreaSqm` | 建物面積 | m2 | 積算価格・類似取引価格に使用 |
+| `lat` / `lon` | 緯度経度 | 度 | 公的API取得のキー |
+| `routeValueYenPerSqm` | 路線価 | 円/m2 | 国税庁路線価、CSV、商用API、手入力 |
+| `fixedAssetTaxValueYen` | 固定資産税評価額 | 円 | 倍率方式に使用 |
+| `valuationMultiplier` | 評価倍率 | 倍 | 倍率方式に使用 |
+| `landCoverRate` | 土地値カバー率 | % | 現状UIでは手入力値。CLIでは自動計算も可能 |
+
+## データ取得CLI
+
+### APIキーあり
+
+```bash
+export MLIT_REINFO_API_KEY="発行されたAPIキー"
+npm install
+npm run fetch:data
+```
+
+### 任意ファイルで実行
+
+```bash
+node src/cli/fetchInvestmentData.js \
+  --input data/sample-property.json \
+  --out data/output.json \
+  --from 20241 \
+  --to 20254 \
+  --year 2025 \
+  --tileRadius 1 \
+  --landTypeCode 01,02,07
+```
+
+### APIキーなし・手入力値だけで計算
+
+```bash
+node src/cli/fetchInvestmentData.js --input data/sample-property.json --offline
+```
 
 ## 重要: インプット元データについて
 
-現状プロトタイプは外部APIから自動取得していません。URLパラメータ、画面フォームの手入力、デフォルト値を元に判定しています。
+現状のWeb UIは外部APIから自動取得していません。URLパラメータ、画面フォームの手入力、デフォルト値を元に判定しています。
 
-本番運用で必要になる元データ、価格妥当性、土地値カバー率の算出仕様は以下に整理しています。
+データ取得CLIでは、国交省 不動産情報ライブラリAPIから次を取得できます。
 
-- [`docs/input-data-sources.md`](docs/input-data-sources.md): インプット元データ・価格妥当性・土地値カバー率の算出仕様
+- 不動産価格（取引価格・成約価格）情報
+- 地価公示・地価調査
+- 用途地域
+- 将来推計人口
+- 駅別乗降客数
+- 洪水・津波・土砂災害・災害危険区域・大規模盛土などのハザード
+- 人口集中地区
+
+路線価は国税庁の公式APIが確認できないため、MVPでは `routeValueYenPerSqm` の手入力、CSV、自社DB、商用APIアダプタで対応します。
 
 ## 起動方法
 
@@ -58,5 +98,9 @@ npm run dev
 
 - [`docs/requirements.md`](docs/requirements.md): リバースエンジニアリング結果と要件定義
 - [`docs/input-data-sources.md`](docs/input-data-sources.md): インプット元データ・価格妥当性・土地値カバー率の算出仕様
+- [`docs/source-inventory.md`](docs/source-inventory.md): 情報ソース整理表
+- [`docs/data-pipeline.md`](docs/data-pipeline.md): データ取得・算出パイプライン仕様
 - [`src/analysisLogic.js`](src/analysisLogic.js): 計算・判定ロジック
+- [`src/data/pipeline.js`](src/data/pipeline.js): 公的データ取得と統合処理
+- [`src/data/landValuation.js`](src/data/landValuation.js): 土地値カバー率・価格妥当性計算
 - [`test/analysisLogic.test.js`](test/analysisLogic.test.js): 主要ロジックのテスト

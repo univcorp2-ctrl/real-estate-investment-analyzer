@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>収益物件 投資判定プロトタイプ</title>
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Reverse-engineered prototype</p>
+      <h1>収益物件 投資判定アナライザー</h1>
+      <p class="lead">公開画面から推定した6軸スコアリング、DSCR、月間CF、CCR、出口戦略ゲートで S〜E ランクを判定します。</p>
+    </div>
+    <div class="hero-card" id="summary-card">
+      <span class="muted">判定結果</span>
+      <strong class="rank" id="rank">-</strong>
+      <span id="score">0 / 30</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <h2>入力</h2>
+      <form id="analyzer-form" class="grid-form">
+        <label>物件名
+          <input name="name" value="東村山市 戸建て" />
+        </label>
+        <label>物件価格（万円）
+          <input name="price" type="number" step="1" value="880" />
+        </label>
+        <label>月額賃料（万円）
+          <input name="rent" type="number" step="0.1" value="0" />
+          <small>0なら下の br を使います</small>
+        </label>
+        <label>br 推定賃料（千円/月）
+          <input name="br" type="number" step="1" value="58" />
+        </label>
+        <label>構造
+          <select name="str">
+            <option value="RC">RC</option>
+            <option value="SRC">SRC</option>
+            <option value="S">鉄骨</option>
+            <option value="木造">木造</option>
+          </select>
+        </label>
+        <label>築年数
+          <input name="age" type="number" step="1" value="0" />
+        </label>
+        <label>借入額（万円）
+          <input name="loanAmt" type="number" step="1" value="880" />
+        </label>
+        <label>金利（%）
+          <input name="ir" type="number" step="0.01" value="2" />
+        </label>
+        <label>返済期間（年）
+          <input name="ly" type="number" step="1" value="30" />
+        </label>
+        <label>運営費率（%）
+          <input name="opexRatio" type="number" step="0.1" value="25" />
+        </label>
+        <label>空室損率（%）
+          <input name="vacancyRatio" type="number" step="0.1" value="5" />
+        </label>
+        <label>諸費用率（%）
+          <input name="purchaseCostRatio" type="number" step="0.1" value="7" />
+        </label>
+        <label>土地値カバー率（%）
+          <input name="landCoverRate" type="number" step="1" placeholder="任意" />
+        </label>
+        <label>駅徒歩（分）
+          <input name="stationWalk" type="number" step="1" placeholder="任意" />
+        </label>
+        <label>人口トレンド
+          <select name="populationTrend">
+            <option value="">未入力</option>
+            <option value="growing">増加</option>
+            <option value="flat">横ばい</option>
+            <option value="declining">減少</option>
+          </select>
+        </label>
+        <button type="submit">再計算</button>
+      </form>
+    </section>
+
+    <section class="panel result-panel">
+      <h2 id="property-title">結果</h2>
+      <div class="metrics" id="metrics"></div>
+
+      <h3>6軸スコア</h3>
+      <div class="axis-list" id="axis-list"></div>
+
+      <h3>警告・確認ポイント</h3>
+      <ul class="flags" id="flags"></ul>
+    </section>
+  </main>
+
+  <section class="panel wide">
+    <h2>URLパラメータ例</h2>
+    <code id="share-url"></code>
+  </section>
+
+  <script src="src/analysisLogic.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
